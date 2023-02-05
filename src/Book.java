@@ -6,15 +6,12 @@ public class Book {
         this.datePublication = datePublication;
     }
 
-    private String titleBook;
-    private Author author;
+    private final String titleBook;
+    private final Author author;
     private int datePublication;
 
     public String getTitleBook() {
         return titleBook;
-    }
-    public String getAuthor() {
-        return author.getName() + " " + author.getSurname();
     }
     public int getDatePublication() {
         return datePublication;
@@ -22,5 +19,22 @@ public class Book {
 
     public void setDatePublication(int datePublication) {
         this.datePublication = datePublication;
+    }
+
+    @Override
+    public String toString() {
+        return "Название книги: " + titleBook + "\nАвтор: " + author + "\nДата публикации: " + datePublication;
+    }
+    @Override
+    public boolean equals(Object other) {
+        if (this.getClass() != other.getClass() || this.hashCode() != other.hashCode()) {
+            return false;
+        }
+        Book book2 = (Book) other;
+        return titleBook.equals(book2.getTitleBook()) && author.equals(book2.author) && datePublication == book2.getDatePublication();
+    }
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hashCode(titleBook) + author.hashCode() + datePublication;
     }
 }
